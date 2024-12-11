@@ -256,7 +256,7 @@ def calculate_accuracies(group):
                       "given_attempted_accuracy": total_given_attempted_accuracy, "F1": f1})
 
 
-call_modelname = "360gpt2-pro"
+call_modelname = "spark4.0-ultra"
 
 print(f"Model Name: {call_modelname}")
 

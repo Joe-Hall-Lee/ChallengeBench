@@ -87,12 +87,9 @@ subject2category = {
 
 class MMLUEval(Eval):
     def __init__(self, num_examples: int | None = None, language: str = "EN-US", max_workers: int = 10):
-        if language != "EN-US":
-            data_dir = os.path.join(os.path.dirname(__file__), 'data')
-            filename = f"mmlu_{language}.csv"
-        else:
-            data_dir = os.path.join(os.path.dirname(__file__), 'data')
-            filename = "mmlu.csv"
+        data_dir = os.path.join(os.path.dirname(__file__), 'data')
+        filename = "mmlu.csv"
+
         local_path = os.path.join(data_dir, filename)
         df = pd.read_csv(local_path, encoding='latin1')
         self.original_data = df.copy()  # 保存原始数据
@@ -101,7 +98,7 @@ class MMLUEval(Eval):
             examples = random.Random(0).sample(examples, num_examples)
         self.examples = examples
         self.results = []  # 用于存储评估结果
-        self.max_workers = max_workers  # Set the maximum number of threads
+        self.max_workers = max_workers  # 设置最大线程数
 
     def __call__(self, sampler: SamplerBase) -> EvalResult:
         def process_example(row: dict, row_index: int):
@@ -134,14 +131,22 @@ class MMLUEval(Eval):
                 result = SingleEvalResult(
                     html=html, score=score, metrics={category: score}, convo=convo
                 )
-                # 记录评估结果
-                self.results.append({
+
+                # 保存评估结果
+                result_data = {
+                    "Index": row["Index"],
                     "Question": row["Question"],
+                    "Subject": row["Subject"],
                     f"Correct_{sampler}": extracted_answer == row["Answer"],
                     f"Extracted_{sampler}": extracted_answer,
                     f"Score_{sampler}": score,
                     f"Invalid_{sampler}": not extracted_answer
-                })
+                }
+
+                # 在每个问题评估后直接保存结果
+                self.results.append(result_data)
+                self.save_intermediate_results()  # 保存每个问题的结果到文件
+
                 return row_index, result
             except Exception as e:
                 print(f"Error processing question: {row['Question']}. Error: {e}")
@@ -162,6 +167,14 @@ class MMLUEval(Eval):
         sorted_results = [result for _, result in results]  # 取出排序后的结果
 
         return common.aggregate_results(sorted_results)
+
+    def save_intermediate_results(self):
+        # 保存中间结果到文件
+        if self.results:
+            results_df = pd.DataFrame(self.results)
+            file_path = f"F:/CESI/ChallengeBench/result/intermediate_results.csv"
+            results_df.to_csv(file_path, index=False, encoding="utf-8")
+            print(f"保存中间结果到 {file_path}")
 
     def get_results_df(self):
         return pd.DataFrame(self.results)

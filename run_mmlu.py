@@ -11,7 +11,7 @@ from mmlu_eval import MMLUEval
 def main():
     debug = False
     samplers = {
-        "gpt-4o": "gpt-4o",
+        # "gpt-4o": "gpt-4o",
         # "gemini-1.5": "gemini-1.5",
         # "qwen-plus": "qwen-plus",
         # "ernie-4.0-turbo": "ernie-4.0-turbo"
@@ -19,27 +19,26 @@ def main():
         # "doubao-pro": "doubao-pro",
         # 'yi-lightning': "yi-lightning",
         # "glm-4-plus": "glm-4-plus",
-        "moonshot-v1": "moonshot-v1",
-        # "gy-pangu": "gy-pangu"
+        # "moonshot-v1": "moonshot-v1",
+        "gy-pangu": "gy-pangu",
+        # "360gpt2-pro": "360gpt2-pro",
     }
-    max_workers = 64  # 设置线程数
+    max_workers = 32  # 设置线程数
 
     def get_evals(eval_name):
-        match eval_name:
-            case "mmlu_EN-US":
-                return MMLUEval(num_examples=10 if debug else None, language="EN-US", max_workers=max_workers)
-            case _:
-                raise Exception(f"Unrecoginized eval type: {eval_name}")
+        return MMLUEval(num_examples=10 if debug else None, language="EN-US", max_workers=max_workers)
 
     evals = {
         eval_name: get_evals(eval_name)
         for eval_name in [
-            "mmlu_EN-US"
+            "mmlu"
         ]
     }
+
     print(evals)
     debug_suffix = "_DEBUG" if debug else ""
     mergekey2resultpath = {}
+
     # 用于存储所有评估结果的 DataFrame
     all_results = {}
     for sampler_name, sampler in samplers.items():
@@ -47,16 +46,16 @@ def main():
             with tqdm(total=1, desc=f"Running {eval_name} with {sampler_name}", unit="eval") as pbar:
                 result = eval_obj(sampler)
                 pbar.update(1)
-            # ^^^ how to use a sampler
+
+            # 评估完成后将结果写入报告
             file_stem = f"{eval_name}_{sampler_name}"
-            report_filename = f"F:/CESI/ChallengeBench/result/{
-                file_stem}{debug_suffix}.html"
+            report_filename = f"F:/CESI/ChallengeBench/result/{file_stem}{debug_suffix}.html"
             print(f"Writing report to {report_filename}")
-            # 确保目录存在
             os.makedirs(os.path.dirname(report_filename), exist_ok=True)
 
             with open(report_filename, "w", encoding="utf-8") as fh:
                 fh.write(common.make_report(result))
+
             metrics = result.metrics | {"score": result.score}
             print(metrics)
             result_filename = f"F:/CESI/ChallengeBench/result/{file_stem}{debug_suffix}.json"
@@ -75,11 +74,11 @@ def main():
 
             # 将所有结果写入 CSV 文件
             for eval_name, results_df in all_results.items():
-                csv_filename = f"F:/CESI/ChallengeBench/result/{
-                    file_stem}{debug_suffix}.csv"
+                csv_filename = f"F:/CESI/ChallengeBench/result/{file_stem}{debug_suffix}.csv"
                 os.makedirs(os.path.dirname(csv_filename), exist_ok=True)
                 results_df.to_csv(csv_filename, index=False, encoding="utf-8")
                 print(f"Writing CSV to {csv_filename}")
+
     merge_metrics = []
     for eval_sampler_name, result_filename in mergekey2resultpath.items():
         try:
@@ -88,7 +87,7 @@ def main():
             print(e, result_filename)
             continue
         result = result.get("f1_score", result.get("score", None))
-        eval_name = eval_sampler_name[: eval_sampler_name.find("_")]
+        eval_name = eval_sampler_name[:eval_sampler_name.find("_")]
         sampler_name = eval_sampler_name[eval_sampler_name.find("_") + 1:]
         merge_metrics.append(
             {"eval_name": eval_name, "sampler_name": sampler_name, "metric": result}
@@ -98,6 +97,7 @@ def main():
     )
     print("\nAll results: ")
     print(merge_metrics_df.to_markdown())
+
     return merge_metrics
 
 

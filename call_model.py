@@ -7,7 +7,7 @@ headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
     'accept-encoding': 'gzip, deflate',
     'connection': 'keep-alive',
-    'authorization': '25a47c5a-180e-4506-b98f-276436d18d6c',
+    'authorization': '76102227-d5ea-43b8-841e-86466fe15e33',
     'host': '192.168.9.145:9381',
     'origin': 'http://192.168.9.145:9381',
     'referer': 'http://192.168.9.145:9381/test/chat',
