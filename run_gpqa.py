@@ -7,9 +7,17 @@ import common
 from gpqa_eval import GPQAEval
 
 def main():
-    debug = True
+    debug = False
     samplers = {
-        "gemini-1.5": "gemini-1.5",
+        # "gemini-1.5": "gemini-1.5",
+        # "360gpt2-pro": "360gpt2-pro"
+        # "ernie-4.0-turbo": "ernie-4.0-turbo"
+        # "doubao-pro": "doubao-pro"
+        # "qwen-plus": "qwen-plus"
+        # "moonshot-v1": "moonshot-v1"
+        # "spark4.0-ultra": "spark4.0-ultra"
+        # "glm-4-plus": "glm-4-plus"
+
     }
 
     def get_evals(eval_name):

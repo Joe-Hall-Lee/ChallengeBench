@@ -14,16 +14,16 @@ def main():
         # "gpt-4o": "gpt-4o",
         # "gemini-1.5": "gemini-1.5",
         # "qwen-plus": "qwen-plus",
-        # "ernie-4.0-turbo": "ernie-4.0-turbo"
+        "ernie-4.0-turbo": "ernie-4.0-turbo"
         # "spark4.0-ultra": "spark4.0-ultra"
         # "doubao-pro": "doubao-pro",
         # 'yi-lightning': "yi-lightning",
         # "glm-4-plus": "glm-4-plus",
         # "moonshot-v1": "moonshot-v1",
-        "gy-pangu": "gy-pangu",
+        # "gy-pangu": "gy-pangu",
         # "360gpt2-pro": "360gpt2-pro",
     }
-    max_workers = 32  # 设置线程数
+    max_workers = 16  # 设置线程数
 
     def get_evals(eval_name):
         return MMLUEval(num_examples=10 if debug else None, language="EN-US", max_workers=max_workers)

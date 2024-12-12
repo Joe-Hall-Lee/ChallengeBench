@@ -8,16 +8,18 @@ data = pd.read_csv(file_path, encoding='latin1')
 
 # 模型列名
 model_columns = [
-    'gemini-1.5',
     'gpt-4o',
-    'qwen-plus',
-    'yi-lightning',
-    'glm-4-plus',
     'doubao-pro',
-    'llama-3.1-70b',
     'qwen-2.5-72b',
+    '360gpt2-pro',
+    'llama-3.1-70b',
+    'yi-lightning',
+    'qwen-plus',
+    'glm-4-plus',
     'qwq-32b',
-    '360gpt2-pro'
+    'gemini-1.5',
+    'ernie-4.0-turbo',
+    'moonshot-v1'
 ]
 
 # 计算每个模型的正确率
