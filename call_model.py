@@ -7,11 +7,11 @@ headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
     'accept-encoding': 'gzip, deflate',
     'connection': 'keep-alive',
-    'authorization': '76102227-d5ea-43b8-841e-86466fe15e33',
+    'authorization': '8ccaa96d-25c1-4fb6-9f30-36e415fe728b',
     'host': '192.168.9.145:9381',
     'origin': 'http://192.168.9.145:9381',
     'referer': 'http://192.168.9.145:9381/test/chat',
-    'x-client-info': 'clientId=63873e6e3969a95807257e8a785e3d9d',
+    'x-client-info': 'clientId=a7e84c6d09c388328e290c267fe376ef',
     'ignorecanceltoken': 'true',
     'accept': 'application/json, text/plain, */*',
     'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8'

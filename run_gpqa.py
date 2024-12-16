@@ -16,7 +16,10 @@ def main():
         # "qwen-plus": "qwen-plus"
         # "moonshot-v1": "moonshot-v1"
         # "spark4.0-ultra": "spark4.0-ultra"
-        # "glm-4-plus": "glm-4-plus"
+        # "glm-4-plus": "glm-4-plus",
+        # 'yi-lightning': "yi-lightning",
+        # "gy-pangu": "gy-pangu",
+        "hunyuan-turbo": "hunyuan-turbo"
 
     }
 

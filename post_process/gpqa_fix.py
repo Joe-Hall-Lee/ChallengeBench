@@ -3,7 +3,7 @@ from difflib import SequenceMatcher
 
 # 读取两个 CSV 文件
 file1 = pd.read_csv('../data/gpqa_diamond.csv', encoding='latin1')
-file2 = pd.read_csv('../result/gpqa_gemini-1.5.csv', encoding='latin1')
+file2 = pd.read_csv('../result/gpqa_moonshot-v1.csv', encoding='latin1')
 
 
 # 定义一个函数来计算两个字符串的相似度
