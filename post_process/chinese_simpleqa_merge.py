@@ -6,7 +6,7 @@ import glob
 def merge_json_to_csv(input_dir, output_file):
     # 存储所有模型列表
     models = [
-        'gemini-1.5', 'gpt-4o', 'qwen-plus', 'yi-lightning', '360gpt2-pro'
+        'doubao-pro'
     ]
 
     # 存储问题数据的字典
@@ -66,7 +66,7 @@ def merge_json_to_csv(input_dir, output_file):
 
     print(f"CSV 文件已生成: {output_file}")
 
-input_directory = '../result/chinese_simpleqa'
-output_csv_file = '../result/chinese_simpleqa/chinese_simpleqa_results.csv'
+input_directory = '../result/models_doubao-pro'
+output_csv_file = '../result/chinese_simpleqa/chinese_simpleqa_results1.csv'
 
 merge_json_to_csv(input_directory, output_csv_file)

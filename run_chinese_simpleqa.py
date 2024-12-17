@@ -186,7 +186,7 @@ def judge_answer(question, ref_answer, answer):
     prompt = judge_prompt.format(question=question, target=ref_answer, predicted_answer=answer)
     messages = "你是一个智能助手，请根据给定问题、标准答案和模型预测的答案来评估模型的回答是否正确。\n"
     messages += prompt
-    output = call_model(messages, "gpt-4o")
+    output = call_model(messages, "yi-lightning")
     correct = "C"
     try:
         match = re.search(r"(A|B|C)", output)
@@ -256,7 +256,7 @@ def calculate_accuracies(group):
                       "given_attempted_accuracy": total_given_attempted_accuracy, "F1": f1})
 
 
-call_modelname = "spark4.0-ultra"
+call_modelname = "doubao-pro"
 
 print(f"Model Name: {call_modelname}")
 

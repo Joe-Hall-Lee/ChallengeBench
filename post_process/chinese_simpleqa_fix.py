@@ -18,7 +18,7 @@ def read_json_file(file_path):
         return [json.loads(line) for line in f]
 
 # 读取并清理第一个文件中的无效 JSON 行
-first_file_data = read_valid_json_lines('../result/models_yi-lightning/chinese_simpleqa.jsonl')
+first_file_data = read_valid_json_lines('../result/models_doubao-pro/chinese_simpleqa.jsonl')
 
 # 读取第二个文件（不带模型输出的文件）
 second_file_data = read_json_file('../data/chinese_simpleqa.jsonl')
@@ -50,6 +50,6 @@ print(f"新增的条目数量: {len(new_entries)}")
 print(f"正确率: {accuracy * 100:.2f}%")
 
 # 保存新的文件
-with open('../result/models_yi-lightning/chinese_simpleqa.jsonl', 'w', encoding='latin-1') as f:
+with open('../result/models_doubao-pro/chinese_simpleqa.jsonl', 'w', encoding='latin-1') as f:
     for entry in first_file_data:
         f.write(json.dumps(entry, ensure_ascii=False) + '\n')
