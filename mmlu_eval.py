@@ -88,7 +88,7 @@ subject2category = {
 class MMLUEval(Eval):
     def __init__(self, num_examples: int | None = None, language: str = "EN-US", max_workers: int = 10):
         data_dir = os.path.join(os.path.dirname(__file__), 'data')
-        filename = "mmlu.csv"
+        filename = "mmlu-spark4.0-ultra.csv"
 
         local_path = os.path.join(data_dir, filename)
         df = pd.read_csv(local_path, encoding='latin1')

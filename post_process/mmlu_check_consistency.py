@@ -1,7 +1,7 @@
 import pandas as pd
 
 # 读取两个 CSV 文件
-df1 = pd.read_csv('F:/CESI/ChallengeBench/result/mmlu/mmlu_EN-US_spark4.0-ultra.csv')
+df1 = pd.read_csv('F:/CESI/ChallengeBench/result/mmlu/mmlu_EN-US_spark4.0-ultra.csv', encoding='latin1')
 df2 = pd.read_csv('F:/CESI/ChallengeBench/data/mmlu.csv', encoding='latin1')
 
 # 创建一个字典来存储结果
